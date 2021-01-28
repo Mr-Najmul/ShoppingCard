@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="cart">
+                <div class="col-md-12 col-lg-10 mx-auto">
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-7 center-item">
+                                <img src="images/product-1.png" alt="">
+                                <h5>iPhone 11 128GB Black</h5>
+                            </div>
+
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button id="phoneDecrement" class="btn btn-default"><i
+                                            class="fas fa-minus"></i></button>
+                                    <input id="phoneQty" type="text" class="form-control text-center" value="1">
+                                    <button id="phoneIncrement" class="btn btn-default"><i
+                                            class="fas fa-plus"></i></button>
+                                </div>
+                                <h5 id="phoneAmount">$1219</h5>
+                                <img id="phoneRemove" src="images/remove.png" alt="" class="remove-item">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-7 center-item mx-auto">
+                                <img src="images/product-2.png" alt="">
+                                <h5>iPhone 11 Silicone Case - Black</h5>
+                            </div>
+                            <div class="col-md-5 center-item">
+                                <div class="input-group number-spinner">
+                                    <button id="casingDecrement" class="btn btn-default"><i
+                                            class="fas fa-minus"></i></button>
+                                    <input id="casingQty" type="text" class="form-control text-center" value="1">
+                                    <button id="casingIncrement" class="btn btn-default"><i
+                                            class="fas fa-plus"></i></button>
+
+                                </div>
+                                <h5 id="casingAmount">$59</h5>
+                                <img id="casingRemove" src="images/remove.png" alt="" class="remove-item">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h5>Subtotal: </h5>
+                                <h5>Tax:</h5>
+                                <h5>Total:</h5>
+                            </div>
+
+                            <div class="col-md-4 status">
+                                <h5>$ <span id="subTotal"> 1278</span></h5>
+                                <h5>$0</h5>
+                                <h5>$<span id="total"> 1278</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pt-4 pb-4">
+                        <button id="checkOut" type="button" class="btn btn-success check-out">Check Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        //   phoneIncrement function
+
+        const phoneIncrement = document.getElementById('phoneIncrement');
+        phoneIncrement.addEventListener('click', addMobile);
+
+        function addMobile() {
+            const mobilePrice = 1219;
+
+            const phoneQty = parseInt(document.getElementById('phoneQty').value) + 1;
+            const phoneAmount = document.getElementById('phoneAmount').innerText;
+            const totalPrice = phoneQty * mobilePrice;
+            document.getElementById('phoneAmount').innerText = "$ " + totalPrice;
+            document.getElementById('phoneQty').value = phoneQty;
+
+
+            const subTotal = parseFloat(document.getElementById('subTotal').innerText);
+            const newSubtotal = subTotal + mobilePrice;
+            document.getElementById('subTotal').innerText = newSubtotal;
+            document.getElementById('total').innerText = newSubtotal;
+        }
+
+        // phone Decrement
+
+        mobilePrice = 1219;
+
+        const phoneDecrement = document.getElementById('phoneDecrement');
+        phoneDecrement.addEventListener('click', phoneRemove);
+
+        function phoneRemove() {
+            const phoneQty = parseInt(document.getElementById('phoneQty').value) - 1;
+            document.getElementById('phoneQty').value = phoneQty;
+            const totalPrice = phoneQty * mobilePrice;
+            const phoneAmount = document.getElementById('phoneAmount').innerText;
+            document.getElementById('phoneAmount').innerText = "$" + totalPrice;
+
+
+
+            const subTotal = parseFloat(document.getElementById('subTotal').innerText);
+            const newSubtotal = subTotal - mobilePrice;
+            document.getElementById('subTotal').innerText = newSubtotal;
+            document.getElementById('total').innerText = newSubtotal;
+        }
+
+
+        //casing increment
+
+        const casingPrice = 59;
+
+        const casingIncrement = document.getElementById('casingIncrement');
+        casingIncrement.addEventListener('click', casingAdd)
+
+
+        function casingAdd(){
+            const casingQty = parseInt(document.getElementById('casingQty').value) +1;
+            const casingAmount = document.getElementById('casingAmount').innerText;
+            const totalPrice = casingQty * 59;
+            
+            document.getElementById('casingQty').value = casingQty;
+            document.getElementById('casingAmount').innerText = "$ " + totalPrice;
+
+
+            const subTotal = parseFloat(document.getElementById('subTotal').innerText);
+            const newSubtotal = subTotal + casingPrice;
+            document.getElementById('subTotal').innerText =newSubtotal;
+            document.getElementById('total').innerText = newSubtotal;
+
+        }
+
+        //casing Decrement
+
+        
+
+        const casingDecrement = document.getElementById('casingDecrement');
+        casingDecrement.addEventListener('click', casingRemove);
+
+        function casingRemove(){
+            const casingPrice = 59;
+            const casingQty = parseInt(document.getElementById('casingQty').value) -1;
+            const casingAmount = document.getElementById('casingAmount').innerText;
+            totalPrice = casingQty * casingPrice;
+            document.getElementById('casingAmount').innerText = totalPrice;
+            document.getElementById('casingQty').value = casingQty;
+
+
+            const subTotal = document.getElementById('subTotal').innerText;
+            newSubtotal =subTotal - casingPrice;
+            document.getElementById('subTotal').innerText = newSubtotal;
+            document.getElementById('total').innerText = newSubtotal;
+        }
+
+         
+    </script>
+</body>
+
+</html>
